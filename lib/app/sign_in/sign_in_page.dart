@@ -11,7 +11,7 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  Container BuildContent() {
+  Widget BuildContent() {
     return Container(
       color: Colors.deepPurple,
       child: Column(
