@@ -7,11 +7,11 @@ class SignInPage extends StatelessWidget {
       appBar:
           AppBar(title: Center(child: Text('Time Tracker')), elevation: 15.0),
       //backgroundColor: Colors.deepPurple,
-      body: BuildContent(),
+      body: _BuildContent(),
     );
   }
 
-  Widget BuildContent() {
+  Widget _BuildContent() {
     return Container(
       color: Colors.deepPurple,
       child: Column(
