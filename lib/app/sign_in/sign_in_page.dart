@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/Sign_In_Button.dart';
-
+import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
+import 'package:time_tracker_flutter_course/common_widgets/custom_raised_button.dart';
 
 class SignInPage extends StatelessWidget {
   @override
@@ -38,22 +39,62 @@ class SignInPage extends StatelessWidget {
             ),
           ),
           SizedBox(
+            height: 48.0,
+          ),
+          SocialSignInButton(
+            text:'Sign In with Google',
+            logo: 'images/google-logo.png',
+            textcolor: Colors.black,
+            Buttoncolor: Colors.white,
+            BorderRadius: 18.0,
+            Height: 50.0,
+            onPressed: () {},
+          ),
+          SizedBox(
             height: 8.0,
+          ),
+          SocialSignInButton(
+            text:'Sign In with Facebook',
+            logo: 'images/facebook-logo.png',
+            textcolor: Colors.white,
+            Buttoncolor: Color(0xFF334D92),
+            BorderRadius: 18.0,
+            Height: 50.0,
+            onPressed: () {},
+          ),
+          SizedBox(
+            height: 8.0,
+          ),
+          SocialSignInButton(
+              text:'Sign In with Email',
+              logo: 'images/email-logo.png',
+              Buttoncolor: Colors.teal[800],
+              textcolor: Colors.white,
+              BorderRadius: 18.0,
+              onPressed: () {},
+              Height: 50.0),
+          SizedBox(
+            height: 8.0,
+          ),
+          Text(
+            'or',
+            style: TextStyle(
+              fontSize: 17.0,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
           ),
           SizedBox(
             height: 8.0,
           ),
           SignInButton(
-              text:'Sign In with Google',
-            Buttoncolor: Colors.white,
-            textcolor: Colors.black,
-            BorderRadius: 18.0,
-            onPressed: () {},
-            Height:50.0
-          ),
-          SizedBox(
-            height: 8.0,
-          ),
+              text: 'Sign In as Guest',
+              Buttoncolor: Colors.lime[600],
+              textcolor: Colors.white,
+              BorderRadius: 18.0,
+              onPressed: () {},
+              Height: 50.0),
+          //Image.asset('images/google-logo.png'),
         ],
       ),
     );
