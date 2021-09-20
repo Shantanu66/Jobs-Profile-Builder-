@@ -8,7 +8,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.bordorRadius,
     this.height,
     this.onPressed,
-  });
+  }) :assert(bordorRadius!=null,height!=null);
   final Widget child;
   final Color color1;
   final Color color2;
