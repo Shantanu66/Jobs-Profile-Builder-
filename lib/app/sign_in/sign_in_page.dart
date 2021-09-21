@@ -11,12 +11,18 @@ class SignInPage extends StatelessWidget {
           AppBar(title: Center(child: Text('Time Tracker')), elevation: 13.0),
       //backgroundColor: Colors.deepPurple,
       body: _BuildContent(),
-      backgroundColor: Colors.deepPurple[400],
     );
   }
 
   Widget _BuildContent() {
     return Container(
+      decoration: BoxDecoration(
+
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end:Alignment.bottomRight,
+            colors: [Colors.deepPurple,Colors.white])
+      ),
       padding: EdgeInsets.all(15.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,12 +32,12 @@ class SignInPage extends StatelessWidget {
             'Sign In',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 32.0,
-              fontWeight: FontWeight.w700,
+              fontSize: 35.0,
+              fontWeight: FontWeight.w800,
               color: Colors.white,
               shadows: [
                 Shadow(
-                  offset: Offset(4.0, 4.0),
+                  offset: Offset(3.0, 3.0),
                   blurRadius: 20.0,
                   color: Color.fromARGB(150, 0, 0, 0),
                 )
