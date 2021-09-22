@@ -15,8 +15,13 @@ class SignInPage extends StatelessWidget {
   }
 
   Future<void> _SignInAnonymously() async {
-    final usercredentials = await FirebaseAuth.instance.signInAnonymously();
-    print('${usercredentials.user.uid}');
+    try {
+      final usercredentials = await FirebaseAuth.instance.signInAnonymously();
+      print('${usercredentials.user.uid}');
+    }
+    catch(e){
+      print(e.toString());
+    }
   }
 
   Widget _BuildContent() {
@@ -38,12 +43,12 @@ class SignInPage extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 35.0,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w900,
               color: Colors.black,
               shadows: [
                 Shadow(
                   offset: Offset(3.0, 3.0),
-                  blurRadius: 20.0,
+                  blurRadius: 10.0,
                   color: Color.fromARGB(150, 0, 0, 0),
                 )
               ],
