@@ -4,6 +4,7 @@ import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.da
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,11 +14,13 @@ class SignInPage extends StatelessWidget {
       body: _BuildContent(),
     );
   }
+  const SignInPage({Key key, @required this.onSignIn}) : super(key: key);
+  final void Function(User) onSignIn;
 
   Future<void> _SignInAnonymously() async {
     try {
       final usercredentials = await FirebaseAuth.instance.signInAnonymously();
-      print('${usercredentials.user.uid}');
+      onSignIn(usercredentials.user);
     }
     catch(e){
       print(e.toString());
