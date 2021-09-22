@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/Sign_In_Button.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInPage extends StatelessWidget {
   @override
@@ -12,6 +12,11 @@ class SignInPage extends StatelessWidget {
       //backgroundColor: Colors.deepPurple,
       body: _BuildContent(),
     );
+  }
+
+  Future<void> _SignInAnonymously() async {
+    final usercredentials = await FirebaseAuth.instance.signInAnonymously();
+    print('${usercredentials.user.uid}');
   }
 
   Widget _BuildContent() {
@@ -98,7 +103,7 @@ class SignInPage extends StatelessWidget {
               Buttoncolor: Colors.lime,
               textcolor: Colors.black,
               BorderRadius: 18.0,
-              onPressed: () {},
+              onPressed: _SignInAnonymously,
               Height: 50.0),
           //Image.asset('images/google-logo.png'),
         ],
