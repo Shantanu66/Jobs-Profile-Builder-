@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/Sign_In_Button.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
-import 'package:time_tracker_flutter_course/common_widgets/custom_raised_button.dart';
+
 
 class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-          AppBar(title: Center(child: Text('Time Tracker')), elevation: 13.0),
+          AppBar(title: Center(child: Text('Time Tracker')), elevation: 0.0),
       //backgroundColor: Colors.deepPurple,
       body: _BuildContent(),
     );
@@ -21,7 +21,7 @@ class SignInPage extends StatelessWidget {
         gradient: LinearGradient(
             begin: Alignment.topLeft,
             end:Alignment.bottomRight,
-            colors: [Colors.deepPurple,Colors.white])
+            colors: [Colors.white,Colors.grey[300],Colors.deepPurple])
       ),
       padding: EdgeInsets.all(15.0),
       child: Column(
@@ -34,7 +34,7 @@ class SignInPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 35.0,
               fontWeight: FontWeight.w800,
-              color: Colors.white,
+              color: Colors.black,
               shadows: [
                 Shadow(
                   offset: Offset(3.0, 3.0),
@@ -95,8 +95,8 @@ class SignInPage extends StatelessWidget {
           ),
           SignInButton(
               text: 'Sign In as Guest',
-              Buttoncolor: Colors.lime[600],
-              textcolor: Colors.white,
+              Buttoncolor: Colors.lime,
+              textcolor: Colors.black,
               BorderRadius: 18.0,
               onPressed: () {},
               Height: 50.0),
