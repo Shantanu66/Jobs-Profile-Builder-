@@ -11,30 +11,25 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   User _user;
 
-
   @override
   void initState() {
     _updateuser(FirebaseAuth.instance.currentUser);
     super.initState();
   }
 
-  void _updateuser(User user){
+  void _updateuser(User user) {
     setState(() {
-      _user=user;
+      _user = user;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     if (_user == null) {
-      return SignInPage(
-        onSignIn: _updateuser
-      );
+      return SignInPage(onSignIn: _updateuser);
     }
     return HomePage(
-      onsignout: ()=> _updateuser(null),
+      onsignout: () => _updateuser(null),
     );
   }
 }
