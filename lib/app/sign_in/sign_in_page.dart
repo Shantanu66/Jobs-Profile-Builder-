@@ -27,6 +27,15 @@ class SignInPage extends StatelessWidget {
     }
   }
 
+  Future<void> _SignInwithGoogle() async {
+    try {
+      await auth.signInwithGoogle();
+    }
+    catch(e){
+      print(e.toString());
+    }
+  }
+
   Widget _BuildContent() {
     return Container(
       decoration: BoxDecoration(
@@ -67,7 +76,7 @@ class SignInPage extends StatelessWidget {
             Buttoncolor: Colors.white,
             BorderRadius: 18.0,
             Height: 50.0,
-            onPressed: () {},
+            onPressed: _SignInwithGoogle,
           ),
           SizedBox(
             height: 8.0,
