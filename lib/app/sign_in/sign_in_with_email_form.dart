@@ -11,13 +11,18 @@ class EmailSignInForm extends StatelessWidget {
           hintText: 'test@test.com',
         ),
       ),
+      SizedBox(
+        height: 8.0,
+      ),
       TextField(
         decoration: InputDecoration(
           labelText: 'Password',
         ),
         obscureText: true,
       ),
-
+      SizedBox(
+        height: 8.0,
+      ),
       ElevatedButton(
         child:Text('Sign In'),
         style: ElevatedButton.styleFrom(
@@ -26,6 +31,9 @@ class EmailSignInForm extends StatelessWidget {
           ),
         ),
         onPressed: () {},
+      ),
+      SizedBox(
+        height: 8.0,
       ),
       TextButton(
         child: Text('Need an Account?Register'),
