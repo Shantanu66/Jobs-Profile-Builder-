@@ -10,7 +10,18 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-          AppBar(title: Center(child: Text('Time Tracker')), elevation: 0.0),
+          AppBar(title:Center(child: Text('Time Tracker')),
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.deepPurple[600],
+                      Colors.deepPurple[200],
+                    ],
+                  ),
+                ),
+              )
+              ,elevation: 0.0),
       //backgroundColor: Colors.deepPurple,
       body: _BuildContent(context),
     );
@@ -47,13 +58,7 @@ class SignInPage extends StatelessWidget {
 
   Widget _BuildContent(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end:Alignment.bottomRight,
-            colors: [Colors.white,Colors.grey[300],Colors.deepPurple])
-      ),
+      color: Colors.grey[200],
       padding: EdgeInsets.all(15.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
