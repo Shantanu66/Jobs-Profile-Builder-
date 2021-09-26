@@ -23,10 +23,12 @@ class EmailSignInPage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Card(
-            child: EmailSignInForm(),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
+          child: Center(
+            child: Card(
+              child: EmailSignInForm(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40),
+              ),
             ),
           ),
         ),
