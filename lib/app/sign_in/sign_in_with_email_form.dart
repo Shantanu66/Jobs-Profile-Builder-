@@ -22,7 +22,7 @@ class EmailSignInForm extends StatelessWidget {
         child:Text('Sign In'),
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
         onPressed: () {},
