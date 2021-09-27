@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
+import 'package:time_tracker_flutter_course/app/sign_in/validators.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 enum EmailSignInFormType { signIn, register }
 
-class EmailSignInForm extends StatefulWidget {
+class EmailSignInForm extends StatefulWidget with EmailAndPasswordValidators{
   EmailSignInForm({@required this.auth});
   final AuthBase auth;
 
@@ -16,6 +17,7 @@ class EmailSignInForm extends StatefulWidget {
 class _EmailSignInFormState extends State<EmailSignInForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
 
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
@@ -45,9 +47,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
   List<Widget> _buildChildren() {
     final primarytext=_formType==EmailSignInFormType.signIn?
-        'Sign In':'Create an Account';
+        'Sign In':'Create Acc';
     final secondarytext=_formType==EmailSignInFormType.signIn?
         'Need an Account?Register':'Have an Account?Sign In';
+
+    bool submitEnabled=widget.emailValidator.isValid(_email) &&
+    widget.passwordValidator.isValid(_password);
     return [
       _buildEmailTextField(),
       SizedBox(
@@ -61,7 +66,8 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         child: Center(
           child: Text(
             primarytext,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         color: Colors.deepPurple,
@@ -90,10 +96,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   }
 
   TextField _buildPasswordTextField() {
+    bool passwordValid=widget.passwordValidator.isValid(_password);
     return TextField(
       controller: _passwordController,
       decoration: InputDecoration(
         labelText: 'Password',
+        errorText: passwordValid?null:widget.InvalidPasswordErrorText,
       ),
       obscureText: true,
       textInputAction: TextInputAction.done,
@@ -101,11 +109,14 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   }
 
   TextField _buildEmailTextField() {
+    bool emailValid=widget.emailValidator.isValid(_email);
+
     return TextField(
       controller: _emailController,
       decoration: InputDecoration(
         labelText: 'Email',
         hintText: 'test@test.com',
+        errorText: emailValid?null:widget.InvalidEmailErrorText,
       ),
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
