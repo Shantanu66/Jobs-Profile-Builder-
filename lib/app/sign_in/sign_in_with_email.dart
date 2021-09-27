@@ -19,7 +19,7 @@ class EmailSignInPage extends StatelessWidget {
             ),
           ),
           titleSpacing: 110.0,
-          elevation: 2.0,
+          elevation: 15.0,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -29,6 +29,8 @@ class EmailSignInPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(40),
               ),
+              elevation: 20.0,
+
             ),
           ),
         ),
@@ -36,14 +38,16 @@ class EmailSignInPage extends StatelessWidget {
       ),
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
               colors: [
                 Colors.deepPurple[50],
                 Colors.deepPurple[100],
                 Colors.deepPurple[200],
                 Colors.deepPurple[300],
                 Colors.deepPurple[400],
+                Colors.deepPurple[500],
+                Colors.deepPurple[600]
               ]
           )
       ),

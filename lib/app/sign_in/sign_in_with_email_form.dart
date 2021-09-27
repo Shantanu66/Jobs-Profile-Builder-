@@ -1,8 +1,8 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_button/animated_button.dart';
 
 class EmailSignInForm extends StatelessWidget {
-
   List<Widget> _buildChildren() {
     return [
       TextField(
@@ -12,7 +12,7 @@ class EmailSignInForm extends StatelessWidget {
         ),
       ),
       SizedBox(
-        height: 8.0,
+        height: 12.0,
       ),
       TextField(
         decoration: InputDecoration(
@@ -21,25 +21,34 @@ class EmailSignInForm extends StatelessWidget {
         obscureText: true,
       ),
       SizedBox(
-        height: 8.0,
+        height: 30.0,
       ),
-      ElevatedButton(
-        child:Text('Sign In'),
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+      AnimatedButton(
+        child: Text(
+          'Sign In',
+          style: TextStyle(color: Colors.white,
+              fontWeight: FontWeight.bold),
         ),
+        color: Colors.deepPurple,
+        shadowDegree: ShadowDegree.light,
+        height: 43,
+        width: 110,
         onPressed: () {},
       ),
       SizedBox(
-        height: 8.0,
+        height: 5.0,
       ),
       TextButton(
-        child: Text('Need an Account?Register'),
-        style: ButtonStyle(
-            overlayColor: MaterialStateProperty.all(Colors.transparent)
+        child: Text(
+          'Need an Account?Register',
+          style: TextStyle(
+              fontSize: 14,
+              letterSpacing: 1,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87),
         ),
+        style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(Colors.transparent)),
         onPressed: () {},
       )
     ];

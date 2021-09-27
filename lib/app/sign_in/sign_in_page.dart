@@ -21,7 +21,7 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
               )
-              ,elevation: 0.0),
+              ,elevation: 10.0),
       //backgroundColor: Colors.deepPurple,
       body: _BuildContent(context),
     );
