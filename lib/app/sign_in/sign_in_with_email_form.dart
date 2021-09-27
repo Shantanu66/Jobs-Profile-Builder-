@@ -1,44 +1,68 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
+import 'package:time_tracker_flutter_course/services/auth.dart';
 
-class EmailSignInForm extends StatelessWidget {
+enum EmailSignInFormType { signIn, register }
 
-  final TextEditingController _emailcontroller=TextEditingController();
-  final TextEditingController _passwordcontroller=TextEditingController();
+class EmailSignInForm extends StatefulWidget {
+  EmailSignInForm({@required this.auth});
+  final AuthBase auth;
 
-  void _submit(){
-    print('email:${_emailcontroller.text}'
-        ',password:${_passwordcontroller.text}');
+  @override
+  _EmailSignInFormState createState() => _EmailSignInFormState();
+}
+
+class _EmailSignInFormState extends State<EmailSignInForm> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  String get _email => _emailController.text;
+  String get _password => _passwordController.text;
+  EmailSignInFormType _formType = EmailSignInFormType.signIn;
+
+  void _submit() async {
+    try {
+      if (_formType == EmailSignInFormType.signIn) {
+        await widget.auth.signInWithEmailAndPassword(_email, _password);
+      } else {
+        await widget.auth.createUserWithEmailAndPassword(_email, _password);
+      }
+      Navigator.of(context).pop();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void _toggleFormType() {
+    setState(() {
+      _formType = _formType == EmailSignInFormType.signIn ?
+      EmailSignInFormType.register : EmailSignInFormType.signIn;
+    });
+    _emailController.clear();
+    _passwordController.clear();
   }
 
   List<Widget> _buildChildren() {
+    final primarytext=_formType==EmailSignInFormType.signIn?
+        'Sign In':'Create an Account';
+    final secondarytext=_formType==EmailSignInFormType.signIn?
+        'Need an Account?Register':'Have an Account?Sign In';
     return [
-      TextField(
-        controller: _emailcontroller,
-        decoration: InputDecoration(
-          labelText: 'Email',
-          hintText: 'test@test.com',
-        ),
-      ),
+      _buildEmailTextField(),
       SizedBox(
         height: 12.0,
       ),
-      TextField(
-        controller: _passwordcontroller,
-        decoration: InputDecoration(
-          labelText: 'Password',
-        ),
-        obscureText: true,
-      ),
+      _buildPasswordTextField(),
       SizedBox(
         height: 30.0,
       ),
       AnimatedButton(
-        child: Text(
-          'Sign In',
-          style: TextStyle(color: Colors.white,
-              fontWeight: FontWeight.bold),
+        child: Center(
+          child: Text(
+            primarytext,
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),
+          ),
         ),
         color: Colors.deepPurple,
         shadowDegree: ShadowDegree.light,
@@ -51,7 +75,7 @@ class EmailSignInForm extends StatelessWidget {
       ),
       TextButton(
         child: Text(
-          'Need an Account?Register',
+          secondarytext,
           style: TextStyle(
               fontSize: 14,
               letterSpacing: 1,
@@ -60,9 +84,33 @@ class EmailSignInForm extends StatelessWidget {
         ),
         style: ButtonStyle(
             overlayColor: MaterialStateProperty.all(Colors.transparent)),
-        onPressed: () {},
+        onPressed: _toggleFormType,
       )
     ];
+  }
+
+  TextField _buildPasswordTextField() {
+    return TextField(
+      controller: _passwordController,
+      decoration: InputDecoration(
+        labelText: 'Password',
+      ),
+      obscureText: true,
+      textInputAction: TextInputAction.done,
+    );
+  }
+
+  TextField _buildEmailTextField() {
+    return TextField(
+      controller: _emailController,
+      decoration: InputDecoration(
+        labelText: 'Email',
+        hintText: 'test@test.com',
+      ),
+      autocorrect: false,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+    );
   }
 
   @override

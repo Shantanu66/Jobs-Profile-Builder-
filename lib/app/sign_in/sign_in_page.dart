@@ -41,7 +41,7 @@ class SignInPage extends StatelessWidget {
 
   Future<void> _SignInwithGoogle() async {
     try {
-      await auth.signInwithGoogle();
+      await auth.signInWithGoogle();
     }
     catch(e){
       print(e.toString());
@@ -51,7 +51,7 @@ class SignInPage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => EmailSignInPage(),
+        builder: (context) => EmailSignInPage(auth: auth,),
       ),
     );
   }
