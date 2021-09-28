@@ -107,10 +107,10 @@ class _SignInPageState extends State<SignInPage> {
             height: 8.0,
           ),
           SocialSignInButton(
-            text: 'Sign In with Facebook',
-            logo: 'images/facebook-logo.png',
+            text: 'Sign In with Github',
+            logo: 'images/GitHub-Mark-Light-32px.png',
             textcolor: Colors.white,
-            Buttoncolor: Color(0xFF334D92),
+            Buttoncolor: Colors.black87,
             BorderRadius: 18.0,
             Height: 50.0,
             onPressed: () {},
@@ -121,7 +121,7 @@ class _SignInPageState extends State<SignInPage> {
           SocialSignInButton(
               text: 'Sign In with Email',
               logo: 'images/email-logo.png',
-              Buttoncolor: Colors.teal[800],
+              Buttoncolor: Colors.pink,
               textcolor: Colors.white,
               BorderRadius: 18.0,
               onPressed: _isLoading ? null : () => _signInWithEmail(context),
@@ -133,7 +133,7 @@ class _SignInPageState extends State<SignInPage> {
             'or',
             style: TextStyle(
               fontSize: 17.0,
-              color: Colors.white,
+              color: Colors.black87,
             ),
             textAlign: TextAlign.center,
           ),
@@ -142,7 +142,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
           SignInButton(
               text: 'Sign In as Guest',
-              Buttoncolor: Colors.lime,
+              Buttoncolor: Colors.greenAccent,
               textcolor: Colors.black,
               BorderRadius: 18.0,
               onPressed: _isLoading ? null : () => _signInAnonymously(context),

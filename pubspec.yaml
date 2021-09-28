@@ -57,6 +57,8 @@ flutter:
     - images/google-logo.png
     - images/facebook-logo.png
     - images/email-logo.png
+    - images/GitHub-Mark-32px.png
+    - images/GitHub-Mark-Light-32px.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
