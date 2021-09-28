@@ -3,6 +3,7 @@ import 'package:time_tracker_flutter_course/app/sign_in/Sign_In_Button.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_with_email.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
+import 'package:time_tracker_flutter_course/services/auth_provider.dart';
 
 class SignInPage extends StatelessWidget {
 
@@ -30,8 +31,9 @@ class SignInPage extends StatelessWidget {
         super(key: key);
   final AuthBase auth;
 
-  Future<void> _SignInAnonymously() async {
+  Future<void> _SignInAnonymously(BuildContext context) async {
     try {
+      final auth = AuthProvider.of(context);
       await auth.signInAnonymously();
     }
     catch(e){
@@ -39,8 +41,9 @@ class SignInPage extends StatelessWidget {
     }
   }
 
-  Future<void> _SignInwithGoogle() async {
+  Future<void> _SignInwithGoogle(BuildContext context) async {
     try {
+      final auth = AuthProvider.of(context);
       await auth.signInWithGoogle();
     }
     catch(e){
@@ -90,7 +93,7 @@ class SignInPage extends StatelessWidget {
             Buttoncolor: Colors.white,
             BorderRadius: 18.0,
             Height: 50.0,
-            onPressed: _SignInwithGoogle,
+            onPressed:()=> _SignInwithGoogle(context),
           ),
           SizedBox(
             height: 8.0,
@@ -134,7 +137,7 @@ class SignInPage extends StatelessWidget {
               Buttoncolor: Colors.lime,
               textcolor: Colors.black,
               BorderRadius: 18.0,
-              onPressed: _SignInAnonymously,
+              onPressed:()=> _SignInAnonymously(context),
               Height: 50.0),
           //Image.asset('images/google-logo.png'),
         ],
