@@ -98,7 +98,7 @@ class _SignInPageState extends State<SignInPage> {
             text: 'Sign In with Google',
             logo: 'images/google-logo.png',
             textcolor: Colors.black,
-            Buttoncolor: Colors.white,
+            Buttoncolor: Colors.white70,
             BorderRadius: 18.0,
             Height: 50.0,
             onPressed: _isLoading ? null : () => _signInWithGoogle(context),
