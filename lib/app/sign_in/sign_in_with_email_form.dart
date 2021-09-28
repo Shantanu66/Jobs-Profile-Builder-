@@ -1,10 +1,10 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/validators.dart';
 import 'package:time_tracker_flutter_course/common_widgets/show_alert_dialog.dart';
+import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 enum EmailSignInFormType { signIn, register }
@@ -21,6 +21,8 @@ class EmailSignInForm extends StatefulWidget with EmailAndPasswordValidators {
 class _EmailSignInFormState extends State<EmailSignInForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
 
   String get _email => _emailController.text;
 
@@ -28,27 +30,32 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   EmailSignInFormType _formType = EmailSignInFormType.signIn;
   bool _submitted = false;
   bool _isLoading = false;
-
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
   void _submit() async {
-    //print('Submit called');
     setState(() {
       _submitted = true;
       _isLoading = true;
     });
     try {
-      //await Future.delayed(Duration(seconds:3));
+      final auth = Provider.of<AuthBase>(context, listen: false);
       if (_formType == EmailSignInFormType.signIn) {
-        await widget.auth.signInWithEmailAndPassword(_email, _password);
+        await auth.signInWithEmailAndPassword(_email, _password);
       } else {
-        await widget.auth.createUserWithEmailAndPassword(_email, _password);
+        await auth.createUserWithEmailAndPassword(_email, _password);
       }
       Navigator.of(context).pop();
-    } catch (e) {
-      showAlertDialog(
+    } on FirebaseAuthException catch (e) {
+      showExceptionAlertDialog(
         context,
-        title: 'Sign In Failed',
-        content: e.toString(),
-        defaultActionText: 'OK',
+        title: 'Sign in failed',
+        exception: e,
       );
     } finally {
       setState(() {
@@ -69,7 +76,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
   List<Widget> _buildChildren() {
     final primarytext =
-        _formType == EmailSignInFormType.signIn ? 'Sign In' : 'Create Acc';
+    _formType == EmailSignInFormType.signIn ? 'Sign In' : 'Create Acc';
     final secondarytext = _formType == EmailSignInFormType.signIn
         ? 'Need an Account?Register'
         : 'Have an Account?Sign In';
@@ -162,5 +169,8 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         children: _buildChildren(),
       ),
     );
+    void _updateState() {
+      setState(() {});
+    }
   }
 }
