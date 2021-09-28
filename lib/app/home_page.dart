@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:time_tracker_flutter_course/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,6 +19,18 @@ class HomePage extends StatelessWidget {
       print(e.toString());
     }
   }
+  Future<void> _confirmSignOut(BuildContext context) async{
+    final didrequestSignOut=await showAlertDialog(
+      context,
+      title:'LogOut',
+      content: 'Are you sure you want to Log Out?',
+      cancelActionText: 'Cancel',
+      defaultActionText: 'Logout',
+    );
+    if(didrequestSignOut==true){
+      (_SignOut)();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +44,7 @@ class HomePage extends StatelessWidget {
                fontSize: 18.0
              ),
              ),
-             onPressed: _SignOut,
+             onPressed: ()=>_confirmSignOut(context),
            )
         ],
 
