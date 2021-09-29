@@ -85,10 +85,20 @@ class _EditJobPageState extends State<EditJobPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.deepPurple[600],
+                Colors.deepPurple[200],
+              ],
+            ),
+          ),
+        ),
         elevation: 2.0,
         title: Text(widget.job == null ? 'New Job' : 'Edit Job'),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text(
               'Save',
               style: TextStyle(fontSize: 18, color: Colors.white),
@@ -98,7 +108,7 @@ class _EditJobPageState extends State<EditJobPage> {
         ],
       ),
       body: _buildContents(),
-      backgroundColor: Colors.grey[200],
+      backgroundColor:Colors.grey[900],
     );
   }
 
