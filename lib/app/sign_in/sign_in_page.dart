@@ -1,6 +1,9 @@
+
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker_flutter_course/app/sign_in/sign_in_manager.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_with_email.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
@@ -8,16 +11,34 @@ import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_
 import 'package:time_tracker_flutter_course/services/auth.dart';
 import 'package:simple_auth/simple_auth.dart' as simpleAuth;
 
-class SignInPage extends StatefulWidget {
-  @override
-  _SignInPageState createState() => _SignInPageState();
-}
+class SignInPage extends StatelessWidget {
+  const SignInPage({
+    Key key,
+    @required this.manager,
+    @required this.isLoading,
+  }) : super(key: key);
+  final SignInManager manager;
+  final bool isLoading;
 
-class _SignInPageState extends State<SignInPage> {
-  bool _isLoading = false;
+  static Widget create(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context, listen: false);
+    return ChangeNotifierProvider<ValueNotifier<bool>>(
+      create: (_) => ValueNotifier<bool>(false),
+      child: Consumer<ValueNotifier<bool>>(
+        builder: (_, isLoading, __) => Provider<SignInManager>(
+          create: (_) => SignInManager(auth: auth, isLoading: isLoading),
+          child: Consumer<SignInManager>(
+            builder: (_, manager, __) =>
+                SignInPage(manager: manager, isLoading: isLoading.value),
+          ),
+        ),
+      ),
+    );
+  }
 
   void _showSignInError(BuildContext context, Exception exception) {
-    if (exception is FirebaseException && exception.code == 'ERROR_ABORTED_BY_USER') {
+    if (exception is FirebaseException &&
+        exception.code == 'ERROR_ABORTED_BY_USER') {
       return;
     }
     showExceptionAlertDialog(
@@ -29,28 +50,19 @@ class _SignInPageState extends State<SignInPage> {
 
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
-      setState(() => _isLoading = true);
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      await auth.signInAnonymously();
+      await manager.signInAnonymously();
     } on Exception catch (e) {
       _showSignInError(context, e);
-    } finally {
-      setState(() => _isLoading = false);
     }
   }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      setState(() => _isLoading = true);
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      await auth.signInWithGoogle();
+      await manager.signInWithGoogle();
     } on Exception catch (e) {
       _showSignInError(context, e);
-    } finally {
-      setState(() => _isLoading = false);
     }
   }
-
 
   void _signInWithEmail(BuildContext context) {
     Navigator.of(context).push(
@@ -60,7 +72,7 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
-  final simpleAuth.GithubApi githubApi = new simpleAuth.GithubApi(
+  /*final simpleAuth.GithubApi githubApi = new simpleAuth.GithubApi(
       "github", "clientId", "clientSecret", "redirect:/",
       scopes: [
         "user",
@@ -93,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
   void logout(simpleAuth.AuthenticatedApi api) async {
     await api.logOut();
     showMessage("Logged out");
-  }
+  }*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,7 +163,7 @@ class _SignInPageState extends State<SignInPage> {
               Buttoncolor: Colors.white,
               BorderRadius: 18.0,
               Height: 50.0,
-              onPressed: _isLoading ? null : () => _signInWithGoogle(context),
+              onPressed: isLoading ? null : () => _signInWithGoogle(context),
             ),
             SizedBox(
               height: 8.0,
@@ -163,9 +175,7 @@ class _SignInPageState extends State<SignInPage> {
               Buttoncolor: Colors.black87,
               BorderRadius: 18.0,
               Height: 50.0,
-              onPressed: _isLoading ? null :()=>{
-                login(githubApi)
-              },
+              onPressed: isLoading ? null :()=>{}
             ),
             SizedBox(
               height: 8.0,
@@ -176,7 +186,7 @@ class _SignInPageState extends State<SignInPage> {
                 Buttoncolor: Colors.pink,
                 textcolor: Colors.white,
                 BorderRadius: 18.0,
-                onPressed: _isLoading ? null : () => _signInWithEmail(context),
+                onPressed: isLoading ? null : () => _signInWithEmail(context),
                 Height: 50.0),
             SizedBox(
               height: 8.0,
@@ -186,7 +196,7 @@ class _SignInPageState extends State<SignInPage> {
                 Buttoncolor: Colors.greenAccent,
                 textcolor: Colors.black,
                 BorderRadius: 18.0,
-                onPressed: _isLoading ? null : () => _signInAnonymously(context),
+                onPressed: isLoading ? null : () => _signInAnonymously(context),
                 Height: 50.0),
             //Image.asset('images/google-logo.png'),
           ],
@@ -197,7 +207,7 @@ class _SignInPageState extends State<SignInPage> {
 
 
   Widget _buildHeader() {
-    if (_isLoading) {
+    if (isLoading) {
       return Center(
         child: CircularProgressIndicator(),
       );

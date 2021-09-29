@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_model.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
@@ -8,7 +9,7 @@ class EmailSignInBloc {
   final AuthBase auth;
 
   final StreamController<EmailSignInModel> _modelController =
-      StreamController<EmailSignInModel>();
+  StreamController<EmailSignInModel>();
   Stream<EmailSignInModel> get modelStream => _modelController.stream;
   EmailSignInModel _model = EmailSignInModel();
 
@@ -47,7 +48,7 @@ class EmailSignInBloc {
   void updateEmail(String email) => updateWith(email: email);
 
   void updatePassword(String password) => updateWith(password: password);
-  
+
   void updateWith({
     String email,
     String password,
