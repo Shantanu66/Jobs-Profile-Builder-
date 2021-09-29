@@ -113,7 +113,7 @@ class _SignInPageState extends State<SignInPage> {
             Buttoncolor: Colors.black87,
             BorderRadius: 18.0,
             Height: 50.0,
-            onPressed: () {},
+            onPressed: _isLoading ? null :()=> {},
           ),
           SizedBox(
             height: 8.0,

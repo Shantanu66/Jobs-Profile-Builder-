@@ -55,7 +55,6 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - images/google-logo.png
-    - images/facebook-logo.png
     - images/email-logo.png
     - images/GitHub-Mark-32px.png
     - images/GitHub-Mark-Light-32px.png
