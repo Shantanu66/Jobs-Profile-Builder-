@@ -6,6 +6,7 @@ import 'package:time_tracker_flutter_course/app/sign_in/sign_in_with_email.dart'
 import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
 import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
+import 'package:simple_auth/simple_auth.dart' as simpleAuth;
 
 class SignInPage extends StatefulWidget {
   @override
@@ -58,6 +59,40 @@ class _SignInPageState extends State<SignInPage> {
         builder: (context) => EmailSignInPage(),
       ),
     );
+  }
+  final simpleAuth.GithubApi githubApi = new simpleAuth.GithubApi(
+      "github", "clientId", "clientSecret", "redirect:/",
+      scopes: [
+        "user",
+        "repo",
+        "public_repo",
+      ]);
+  void showError(dynamic ex) {
+    showMessage(ex.toString());
+  }
+
+  void showMessage(String text) {
+    var alert = new AlertDialog(content: new Text(text), actions: <Widget>[
+      new TextButton(
+          child: const Text("Ok"),
+          onPressed: () {
+            Navigator.pop(context);
+          })
+    ]);
+    showDialog(context: context, builder: (BuildContext context) => alert);
+  }
+
+  void login(simpleAuth.AuthenticatedApi api) async {
+    try {
+      var success = await api.authenticate();
+      showMessage("Logged in success: $success");
+    } catch (e) {
+      showError(e);
+    }
+  }
+  void logout(simpleAuth.AuthenticatedApi api) async {
+    await api.logOut();
+    showMessage("Logged out");
   }
   @override
   Widget build(BuildContext context) {
@@ -128,7 +163,9 @@ class _SignInPageState extends State<SignInPage> {
               Buttoncolor: Colors.black87,
               BorderRadius: 18.0,
               Height: 50.0,
-              onPressed: _isLoading ? null :()=> {},
+              onPressed: _isLoading ? null :()=>{
+                login(githubApi)
+              },
             ),
             SizedBox(
               height: 8.0,
