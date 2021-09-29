@@ -10,8 +10,15 @@ class JobListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(job.name),
-      trailing: Icon(Icons.chevron_right),
+      title: Text(job.name,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 18,
+        fontWeight: FontWeight.w800,
+        letterSpacing: 1.0,
+      ),),
+      trailing: Icon(Icons.account_circle,
+      color: Colors.white,),
       onTap: onTap,
     );
   }

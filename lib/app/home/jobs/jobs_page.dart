@@ -36,14 +36,30 @@ class JobsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jobs'),
+        title: Text('JOBS',
+        style: TextStyle(
+          letterSpacing: 2.0,
+          fontWeight: FontWeight.w900
+        ),),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.deepPurple[600],
+                Colors.deepPurple[200],
+              ],
+            ),
+          ),
+        ),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text(
               'Logout',
               style: TextStyle(
                 fontSize: 18.0,
                 color: Colors.white,
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w900,
               ),
             ),
             onPressed: () => _confirmSignOut(context),
@@ -51,8 +67,14 @@ class JobsPage extends StatelessWidget {
         ],
       ),
       body: _buildContents(context),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+      backgroundColor: Colors.grey[900],
+      floatingActionButton: FloatingActionButton.extended(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(17)
+        ),
+        icon: Icon(Icons.accessibility_sharp),
+        elevation: 12.0,
+        label: Text('Add Jobs'),
         onPressed: () => EditJobPage.show(context),
       ),
     );
