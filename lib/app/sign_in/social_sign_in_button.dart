@@ -10,7 +10,8 @@ class SocialSignInButton extends CustomElevatedButton {
       Color textcolor,
       double BorderRadius,
       VoidCallback onPressed,
-      double Height})
+      double Height,
+      double Width})
       : assert(text!=null,logo!=null),
         super(
             child: Row(

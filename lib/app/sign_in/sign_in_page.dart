@@ -63,7 +63,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-      AppBar(title: Center(child: Text('Time Tracker')),
+      AppBar(title: Center(child: Text('Jobs Profiler')),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -81,74 +81,79 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Widget _BuildContent(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          SizedBox(
-            height: 50.0,
-            child: _buildHeader(),
-          ),
-          SizedBox(
-            height: 48.0,
-          ),
-          SocialSignInButton(
-            text: 'Sign In with Google',
-            logo: 'images/google-logo.png',
-            textcolor: Colors.black,
-            Buttoncolor: Colors.white70,
-            BorderRadius: 18.0,
-            Height: 50.0,
-            onPressed: _isLoading ? null : () => _signInWithGoogle(context),
-          ),
-          SizedBox(
-            height: 8.0,
-          ),
-          SocialSignInButton(
-            text: 'Sign In with Github',
-            logo: 'images/GitHub-Mark-Light-32px.png',
-            textcolor: Colors.white,
-            Buttoncolor: Colors.black87,
-            BorderRadius: 18.0,
-            Height: 50.0,
-            onPressed: _isLoading ? null :()=> {},
-          ),
-          SizedBox(
-            height: 8.0,
-          ),
-          SocialSignInButton(
-              text: 'Sign In with Email',
-              logo: 'images/email-logo.png',
-              Buttoncolor: Colors.pink,
-              textcolor: Colors.white,
-              BorderRadius: 18.0,
-              onPressed: _isLoading ? null : () => _signInWithEmail(context),
-              Height: 50.0),
-          SizedBox(
-            height: 8.0,
-          ),
-          Text(
-            'or',
-            style: TextStyle(
-              fontSize: 17.0,
-              color: Colors.black87,
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end:Alignment.center,
+          colors: [
+            Colors.deepPurple[500],
+            Colors.deepPurple[300],
+            Colors.deepPurple[200],
+            Colors.deepPurple[100],
+            Colors.deepPurple[50],
+            Colors.white
+          ]
+        )
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            SizedBox(
+              height: 50.0,
+              child: _buildHeader(),
             ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 8.0,
-          ),
-          SignInButton(
-              text: 'Sign In as Guest',
-              Buttoncolor: Colors.greenAccent,
+            SizedBox(
+              height: 48.0,
+            ),
+            SocialSignInButton(
+              text: 'Sign In with Google',
+              logo: 'images/google-logo.png',
               textcolor: Colors.black,
+              Buttoncolor: Colors.white,
               BorderRadius: 18.0,
-              onPressed: _isLoading ? null : () => _signInAnonymously(context),
-              Height: 50.0),
-          //Image.asset('images/google-logo.png'),
-        ],
+              Height: 50.0,
+              onPressed: _isLoading ? null : () => _signInWithGoogle(context),
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            SocialSignInButton(
+              text: 'Sign In with Github',
+              logo: 'images/GitHub-Mark-Light-32px.png',
+              textcolor: Colors.white,
+              Buttoncolor: Colors.black87,
+              BorderRadius: 18.0,
+              Height: 50.0,
+              onPressed: _isLoading ? null :()=> {},
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            SocialSignInButton(
+                text: 'Sign In with Email',
+                logo: 'images/email-logo.png',
+                Buttoncolor: Colors.pink,
+                textcolor: Colors.white,
+                BorderRadius: 18.0,
+                onPressed: _isLoading ? null : () => _signInWithEmail(context),
+                Height: 50.0),
+            SizedBox(
+              height: 8.0,
+            ),
+            SignInButton(
+                text: 'Sign In as Guest',
+                Buttoncolor: Colors.greenAccent,
+                textcolor: Colors.black,
+                BorderRadius: 18.0,
+                onPressed: _isLoading ? null : () => _signInAnonymously(context),
+                Height: 50.0),
+            //Image.asset('images/google-logo.png'),
+          ],
+        ),
       ),
     );
   }
@@ -159,22 +164,7 @@ class _SignInPageState extends State<SignInPage> {
       return Center(
         child: CircularProgressIndicator(),
       );
+
     }
-    return Text(
-      'Sign In',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 35.0,
-        fontWeight: FontWeight.w900,
-        color: Colors.black,
-        shadows: [
-          Shadow(
-            offset: Offset(3.0, 3.0),
-            blurRadius: 15.0,
-            color: Color.fromARGB(150, 0, 0, 0),
-          )
-        ],
-      ),
-    );
   }
 }
