@@ -99,6 +99,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
       TextButton(
         child: Text(model.secondaryButtonText),
         onPressed: !model.isLoading ? _toggleFormType : null,
+
       ),
     ];
   }

@@ -28,9 +28,10 @@ class EmailSignInPage extends StatelessWidget {
             child: Card(
               child: EmailSignInFormBlocBased.create(context),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40),
+                borderRadius: BorderRadius.circular(50),
               ),
-              elevation: 20.0,
+              elevation: 25.0,
+              color: Colors.white,
 
             ),
           ),
@@ -39,16 +40,12 @@ class EmailSignInPage extends StatelessWidget {
       ),
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
-                Colors.deepPurple[50],
-                Colors.deepPurple[100],
-                Colors.deepPurple[200],
-                Colors.deepPurple[300],
-                Colors.deepPurple[400],
                 Colors.deepPurple[500],
-                Colors.deepPurple[600]
+                Colors.deepPurple[400],
+                Colors.deepPurple[300],
               ]
           )
       ),
