@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       create: (context) => Auth(),
       child: MaterialApp(
         title: 'Jobs Profiler',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
         ),
